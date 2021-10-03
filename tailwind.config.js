@@ -1,5 +1,7 @@
 module.exports = {
-  purge: ['./pages/**/*.js','./components/**/*.js','./layout/**/*.js','./helpers/**/*.js'],
+  purge: {
+    enabled: true,
+  },
   theme: {
     extend: {
       animation: {
