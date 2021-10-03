@@ -27,7 +27,7 @@ export default function Registro(){
     });
 
         try{
-            const response = await api.post('/usuario', data);
+            await api.post('/usuario', data);
             alert(`Novo usuário cadastradro!`);
 
             history.push('/')
