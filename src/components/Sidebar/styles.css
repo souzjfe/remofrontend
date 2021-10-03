@@ -1,0 +1,35 @@
+nav.sidebar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    width: 12rem;
+    top: 0;
+    left: 0;
+    background-color: #151515;
+}
+
+nav.sidebar ul.side__menu {
+    /* Resetting css */
+    all: initial;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 1.125rem;
+}
+
+nav.sidebar ul.side__menu li.side__item {
+    /* Resetting css */
+    all: initial;
+    margin: 1rem 1rem;
+}
+
+nav.sidebar ul.side__menu li.side__item a.side__link{
+    /* Resetting css */
+    all: initial;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1.125rem;
+    color: #fcfcfc;
+}
