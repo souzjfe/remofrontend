@@ -12,11 +12,14 @@ import Sidebar from '../../components/Sidebar';
 
 export default function Profile(){
     const [tarefas, setTarefas] = useState([]);
+    const [sprints, setSprint] = useState([]);
 
     const idusuario = localStorage.getItem('idusuario')
     const idprojeto = localStorage.getItem('idprojeto')
     const tituloprojeto = localStorage.getItem('tituloprojeto')
     const history = useHistory();
+    let IdSprint  = 0;
+    let tarefasFiltradas = null ;
 
     useEffect(() => {
       if (!idusuario) {
@@ -32,6 +35,15 @@ export default function Profile(){
     
     }, []);
 
+    useEffect(() => {
+      api.get(`sprint`, {
+          headers:{
+              Authorization: idprojeto,
+          }
+      }).then(Response => {
+          setSprint( Response.data)
+      });
+  }, [idprojeto]);
 
     useEffect(() => {
         api.get(`tarefa`, {
@@ -47,7 +59,15 @@ export default function Profile(){
       localStorage.setItem('idtarefa', id)
       console.log(id)
       history.push('/Sprint/EditarTarefa')
-  }
+    }
+
+    function addSprint(idsprint, ){
+      if(idsprint != IdSprint){
+        IdSprint = idsprint
+      }
+    
+      return null;
+    };
 
     function corrigeStatus(status){
       
@@ -87,6 +107,23 @@ export default function Profile(){
     function handleNovaTarefa() {
         history.push('/Tarefa/Nova')
     }
+
+    function filtrarTarefas( idSprint, titulo){
+
+      if (idSprint == -1){
+        tarefasFiltradas = tarefas.filter( element => element.idsprint == null);
+        return "* Tarefas Não Priorizadas"
+      }else{
+        tarefasFiltradas = tarefas.filter( element => element.idsprint == idSprint);
+
+        if (tarefasFiltradas.length > 0){
+          return "Sprint: "+ titulo
+        }
+        
+      }
+
+      return "Sprint: "+ titulo + " -  Sem Tarefas Alocadas"
+  }
 
     function handleProcessadorTarefas() {
 
@@ -135,34 +172,84 @@ export default function Profile(){
 
             <main>
 
-            <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                <button onClick={() => handleProcessadorTarefas()} class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded float-right">
-                   Priorizar
-                </button>
-              <button onClick={() => handleNovaTarefa()} class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded float-right">
-                  <HiPlusCircle  size={21} color="White"/> 
-              </button>
-            </div>
-
-            <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-5">
-              {tarefas.map((tarefa) => (
-                <button  onClick={()=> handleEditarTarefa(tarefa.idtarefa)} key={tarefa.idtarefa}> 
-                  <div class="rounded shadow-lg bg-gray-300 hover:bg-gray-400"> 
-                    
-                      <div class="px-6 py-4 ">
-                      <span class={corrigeStatusSpan(tarefa.status)}>{corrigeStatus(tarefa.status)}</span>
-                          <div class=" text mb-0 mb-2"> <b>Tarefa:</b> <u>{tarefa.descricao}</u></div>
-                          <div class=" text mb-0 mb-2"><b>Funcionalidade:</b> <i>{tarefa.funcionalidade}</i>   <b>Sprint:</b> <i>{tarefa.descrsprint}</i></div>
-                          
-                      </div>
-                      
-                    
-                  </div>
+              <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                  <button onClick={() => handleProcessadorTarefas()} class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded float-right">
+                    Priorizar
                   </button>
-                
-              ))}
-            
-            </div>
+                <button onClick={() => handleNovaTarefa()} class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded float-right">
+                    <HiPlusCircle  size={21} color="White"/> 
+                </button>
+              </div>
+
+              <div class="p-10 grid">
+  
+                {sprints.map((sprint) => (
+
+                      <div class="mb-0 mb-2"> 
+
+                        <div className="rounded overflow-hidden bg-white-00">
+                            <div className=" mb-4">
+                                <hr size="10" width="100%"/>
+                            </div>
+                        </div>
+
+                        <h1 className="text-2xl font-bold text-gray-650 mb-2" >{filtrarTarefas(sprint.idsprint,sprint.titulo)}</h1> 
+
+                        <div class="p-10 flex grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-5">
+                          {tarefasFiltradas.map((tarefa) => ( 
+                            
+                              <button  onClick={()=> handleEditarTarefa(tarefa.idtarefa)} key={tarefa.idtarefa}> 
+                                <div class="rounded shadow-lg bg-gray-300 hover:bg-gray-400 mb-5"> 
+                                  <div class="px-6 py-4 ">
+                                    <span class={corrigeStatusSpan(tarefa.status)}>{corrigeStatus(tarefa.status)}</span>
+                                     
+                                      <div class=" text mb-0 mb-2 "> <b>Tarefa:</b> <u>{tarefa.descricao}</u></div>
+                                      <div class=" text mb-0 mb-2"><i>"Como {tarefa.persona}, desejo {tarefa.desejo}, para {tarefa.descreu}"</i> </div>
+                              
+                                  </div>
+                                  </div>
+                              </button>
+                            
+                          ))}
+
+                        </div>
+                        
+                      </div>
+
+                      
+                ))}
+
+                <div class="mb-0 mb-2"> 
+
+                  <div className="rounded overflow-hidden bg-white-00">
+                      <div className=" mb-4">
+                          <hr size="10" width="100%"/>
+                      </div>
+                  </div>
+
+                  <h1 className="text-2xl font-bold text-gray-650 mb-2" > {filtrarTarefas(-1, "* Tarefas Não Priorizada")}</h1> 
+
+                  <div class="p-10 flex grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-5">
+                    {tarefasFiltradas.map((tarefa) => ( 
+                      
+                        <button  onClick={()=> handleEditarTarefa(tarefa.idtarefa)} key={tarefa.idtarefa}> 
+                          <div class="rounded shadow-lg bg-gray-300 hover:bg-gray-400 mb-5"> 
+                            <div class="px-6 py-4 ">
+                              <span class={corrigeStatusSpan(tarefa.status)}>{corrigeStatus(tarefa.status)}</span>
+                              
+                                <div class=" text mb-0 mb-2 "> <b>Tarefa:</b> <u>{tarefa.descricao}</u></div>
+                                <div class=" text mb-0 mb-2"><b>Funcionalidade:</b> <i>{tarefa.funcionalidade}</i></div>
+                            </div>
+                            </div>
+                        </button>
+                      
+                    ))}
+                  </div>
+
+                </div>
+
+
+              </div>
             </main>
          </div>                
       

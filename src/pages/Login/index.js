@@ -12,6 +12,8 @@ export default function Login(){
 
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+    const crypto = require("crypto");
+    const secret = 'remoutfpr';
 
     const history = useHistory();
 
@@ -19,7 +21,10 @@ export default function Login(){
         e.preventDefault();
 
         try {
-            const response = await api.post('sessions', {email,senha})
+
+            const hash = crypto.createHmac('sha256', secret).update(senha).digest('hex')
+
+            const response = await api.post('sessions', {email,hash})
 
             //arrumar aqui
             localStorage.setItem('idusuario', response.data.idusuario);

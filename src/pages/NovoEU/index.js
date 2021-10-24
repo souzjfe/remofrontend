@@ -13,7 +13,6 @@ export default function NovoEU() {
     const [persona,setPersona]= useState('');
     const [desejo,setDesejo]= useState('');
     const [descricao,setDescricao]= useState('');
-    const [aceite,setAceite]= useState('');
 
     const idUsuario = localStorage.getItem('idusuario')
     const idprojeto = localStorage.getItem('idprojeto')
@@ -40,7 +39,6 @@ export default function NovoEU() {
             desejo,
             descricao,
             idprojeto,
-            aceite,
         };
 
         try{
@@ -119,12 +117,18 @@ export default function NovoEU() {
                                 <hr size="10" width="100%"/>
                             </div>
                         </div>
+
+                        <div className="container mx-auto  flex justify-center">
+                            <label htmlFor="LastName" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
+                                Estória de Usuário
+                            </label>
+                        </div>
                         
                         <div className="container mx-auto  flex justify-center">
 
                             <div className="xl:w-4/6 lg:w-4/6 md:w-4/6 flex flex-col mb-6">
                                 <label htmlFor="LastName" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
-                                   Estória de Usuário: "Como um..."
+                                   Estória de Usuário: "Como..."
                                 </label>
                                 <textarea 
                                     id="persona" 
@@ -143,14 +147,14 @@ export default function NovoEU() {
                         <div className="container mx-auto  flex justify-center">                            
                             <div className="xl:w-4/6 lg:w-4/6 md:w-4/6 flex flex-col mb-6">
                                 <label htmlFor="LastName" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
-                                    "Eu necessito de..."
+                                    "Desejo..."
                                 </label>
                                 <textarea 
                                     id="desejo" 
                                     name="desejo" 
                                     limit="2000"
                                     required 
-                                    style={{height: 100 }}
+                                    style={{height: 50 }}
                                     className="border border-gray-500 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-700 dark:text-gray-400" 
                                     placeholder="Descreva aqui especificando a necessidade dessa funcionalidade"
                                     value={desejo}    
@@ -169,7 +173,7 @@ export default function NovoEU() {
                                     name="descricao" 
                                     limit="2000"
                                     required 
-                                    style={{height: 100 }}
+                                    style={{height: 50 }}
                                     className="border border-gray-500 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-700 dark:text-gray-400" 
                                     placeholder="Descreva aqui especificando o porque da necessidade dessa funcionalidade"
                                     value={descricao}    
@@ -178,31 +182,6 @@ export default function NovoEU() {
                             </div>  
 
 
-                        </div> 
-
-                        <div className="container mx-auto  flex justify-center">
-                            <div className="xl:w-4/6 lg:w-4/6 md:w-4/6 flex flex-col mb-6">
-                                <hr size="10" width="100%"/>
-                            </div>
-                        </div>
-
-                        <div className="container mx-auto  flex justify-center">
-                            <div className="xl:w-4/6 lg:w-4/6 md:w-4/6 flex flex-col mb-6">
-                                <label htmlFor="LastName" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
-                                    Critérios de Aceite
-                                </label>
-                                <textarea 
-                                    id="aceite" 
-                                    name="aceite" 
-                                    limit="2000" 
-                                    style={{height: 150 }}
-                                    className="border border-gray-500 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-700 dark:text-gray-400" 
-                                    placeholder="Descreva aqui os critérios de aceite da estória de usuário."
-                                    value={aceite}    
-                                    onChange={ e => setAceite(e.target.value)} 
-                                    />
-                            </div>
-                            
                         </div> 
 
                     </div>

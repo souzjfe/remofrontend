@@ -31,6 +31,19 @@ export default function NovaSprint() {
     async function handleNovaSprint(e) {
         e.preventDefault();
 
+        if (dataini > datafim){
+            alert('Oops! Data Final não pode ser menor que a Data Inicial. Por favor, verifique!')
+            return
+        }
+
+        const current = new Date();
+        const date = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
+
+        if ( dataini < date){
+            alert('Oops! Não é possível criar uma Sprint com data anterior a data atual. Por favor, verifique!')
+            return
+        }
+
         const data = {
             titulo,
             dataini,

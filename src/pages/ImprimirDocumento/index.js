@@ -9,6 +9,7 @@ export default function Projeto(){
     const [projeto, setProjeto] = useState([]);
     const [estorias, setEstorias] = useState([]);
     const [tarefas, setTarefas] = useState([]);
+    
     let tarefasFiltradas ;
     let NumTar = 0;
     let NumEu = 0;
@@ -82,12 +83,24 @@ export default function Projeto(){
     }
 
 
-    function verificaTarefa(descr, idtar, ideu) {
+    function verificaTarefa(descr, idtar, status) {
 
         NumTar++
 
-        return "Tarefa "+NumTar+ ": " + descr
-        
+        if(status == 'A'){
+            return "Tarefa "+NumTar+ ": " + descr + " (Status: Analisando)"
+        }else if(status == 'B'){
+            return "Tarefa "+NumTar+ ": " + descr + " (Status: Analisado)"
+        }else if(status == 'C'){
+            return "Tarefa "+NumTar+ ": " + descr + " (Status: Desenvolvendo)"
+        }else if(status == 'D'){
+            return "Tarefa "+NumTar+ ": " + descr + " (Status: Desenvolvido)"
+        }else if(status == 'E'){
+            return "Tarefa "+NumTar+ ": " + descr + " (Status: Entregue)"
+        }else{
+            return "Tarefa "+NumTar+ ": " + descr + " (Status: Testando)"
+        }
+
     }
 
      return (
@@ -151,13 +164,13 @@ export default function Projeto(){
                         </div>
                         
                         <div class=" text mb-0 mb-2"> 
-                            <h2>Estória de Usuario: <b><i>"Como um {eu.persona}, desejo {eu.desejo}, para {eu.descricao }"</i></b></h2> 
+                            <h2>Estória de Usuario: <b><i>"Como {eu.persona}, desejo {eu.desejo}, para {eu.descricao }"</i></b></h2> 
                         </div>
 
                         
                         {tarefasFiltradas.map((tarefa) => (
                             <div class=" text mb-0 mb-2 self-center items-center" key={tarefa.idtarefa}> 
-                                <li><i>{verificaTarefa(tarefa.descricao,eu.idestoria,tarefa.idestoria)}</i></li> 
+                                <li><i>{verificaTarefa(tarefa.descricao,eu.idestoria,tarefa.status)}</i></li> 
                             </div>
                         ))}
                          
@@ -179,7 +192,7 @@ export default function Projeto(){
                 <button onClick={() =>  voltarHome()} class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded float-right">
                     <HiOutlineArrowNarrowLeft  size={21} color="White"/> 
                 </button>
-            </div>
+            </div> 
 
           </div>
 

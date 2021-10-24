@@ -161,7 +161,7 @@ export default function Projeto(){
 
                         <Link to="/UsuarioProjeto">
                             <button className="bg-blue-700 focus:outline-none transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-8 py-2 text-sm" >
-                                <HiUserGroup  size={20} color="White"/>
+                               Time
                             </button>
                         </Link>
                        

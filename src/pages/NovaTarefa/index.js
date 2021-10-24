@@ -111,6 +111,28 @@ export default function NovaTarefa() {
                         </div>
                     </div>
                     <div className="mx-auto pt-4 ">
+
+                    <div className="container mx-auto  flex justify-center">
+                            <div className="xl:w-4/6 lg:w-4/6 md:w-4/6 flex flex-col mb-6">
+                                <label htmlFor="StreetAddress" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
+                                    Estoria Usuário
+                                </label>
+                                <select 
+                                    className="border border-gray-500 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-700 dark:text-gray-400" 
+                                    name="Estoria Usuario"  
+                                    placeholder="Estoria Usuario"
+                                    value={idestoria}    
+                                    onChange={ e => setIdEU(e.target.value)}>
+
+                                    {estoriausuario.map((eu) => (
+                                         <option key={eu.idestoria} value={eu.idestoria}>Como {eu.persona}, desejo {eu.desejo}, para {eu.descricao} </option>
+                                         
+                                    ))}
+                                    
+                                </select>
+
+                            </div>
+                        </div>
                         
                         <div className="container mx-auto  flex justify-center">
                             <div className="xl:w-4/6 lg:w-4/6 md:w-4/6 flex flex-col mb-6">
@@ -188,24 +210,10 @@ export default function NovaTarefa() {
 
                             </div>
 
-                            <div className="xl:w-1/6 lg:w-1/2 md:w-1/2 flex flex-col mb-6 mx-2">
-                                <label htmlFor="Estimativa" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
-                                    Estimativa
-                                </label>
-                                <input 
-                                    type="number" 
-                                    id="Estimativa" 
-                                    name="Estimativa" 
-                                    required 
-                                    className="border border-gray-500 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-700 dark:text-gray-400" 
-                                    placeholder="Horas Estimadas - Ex: 5,5"
-                                    value={estimativa}    
-                                    onChange={ e => setEstimativa(e.target.value)} />
-                            </div>
                         </div> 
 
                         <div className="container mx-auto  flex justify-center">
-                            <div className="xl:w-2/6 lg:w-1/2 md:w-1/2 flex flex-col mb-6 mx-2">
+                            <div className="xl:w-3/6 lg:w-1/2 md:w-1/2 flex flex-col mb-6 mx-2">
                                 <label htmlFor="StreetAddress" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
                                     Sprint
                                 </label>
@@ -222,27 +230,23 @@ export default function NovaTarefa() {
                                     ))}
                                 </select>
 
-                            </div>
+                            </div> 
 
-                            <div className="xl:w-2/6 lg:w-1/2 md:w-1/2 flex flex-col mb-6 mx-2">
-                                <label htmlFor="StreetAddress" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
-                                    Estoria Usuário
+                            <div className="xl:w-1/6 lg:w-1/2 md:w-1/2 flex flex-col mb-6 mx-2">
+                                <label htmlFor="Estimativa" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
+                                    Estimativa
                                 </label>
-                                <select 
+                                <input 
+                                    type="number" 
+                                    id="Estimativa" 
+                                    name="Estimativa" 
+                                    required 
                                     className="border border-gray-500 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-700 dark:text-gray-400" 
-                                    name="Estoria Usuario"  
-                                    placeholder="Estoria Usuario"
-                                    value={idestoria}    
-                                    onChange={ e => setIdEU(e.target.value)}>
-
-                                    {estoriausuario.map((eu) => (
-                                         <option key={eu.idestoria} value={eu.idestoria}>{eu.nome}</option>
-                                         
-                                    ))}
-                                    
-                                </select>
-
+                                    placeholder="Horas Estimadas - Ex: 5,5"
+                                    value={estimativa}    
+                                    onChange={ e => setEstimativa(e.target.value)} />
                             </div>
+                            
                         </div>
                         
 

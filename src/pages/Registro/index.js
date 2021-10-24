@@ -10,28 +10,38 @@ import logoImg from '../../assets/remo.png'
 export default function Registro(){
 
     const [nome, setNome ] = useState('');
-    const [senha, setSenha ] = useState('');
+    const [hash, setHash ] = useState('');
     const [nomeusuario, setNomeUsuario ] = useState('');
     const [email, setEmail ] = useState('');
+    const crypto = require("crypto");
+    const secret = 'remoutfpr';
 
     const history = useHistory();
 
     async function handleRegister(e) {
         e.preventDefault();
 
+        const senha = crypto.createHmac('sha256', secret).update(hash).digest('hex')
+
         const data = ({
-        nome,
-        senha,
-        nomeusuario,
-        email
-    });
+            nome,
+            senha,
+            nomeusuario,
+            email
+        });
 
         try{
-            await api.post('/usuario', data);
-            alert(`Novo usuário cadastradro!`);
-
-            history.push('/')
+            await api.post('/usuario', data).then(Response => {
+                if (Response.data.sucesso){
+                    alert(Response.data.sucesso);
+                    history.push('/')
+                }else{
+                    alert(Response.data.erro);
+                }
+            });
+            
         }catch(err){
+            alert(err)
             alert(`Erro ao cadastrar novo usuário!`)
         }
     }
@@ -61,8 +71,8 @@ export default function Registro(){
                     <input 
                         type="password" 
                         placeholder="Senha"
-                        value={senha}
-                        onChange={e => setSenha(e.target.value)}/>
+                        value={hash}
+                        onChange={e => setHash(e.target.value)}/>
 
                     <input 
                         type="email" 
