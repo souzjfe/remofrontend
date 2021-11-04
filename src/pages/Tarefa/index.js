@@ -237,8 +237,10 @@ export default function Profile(){
                             <div class="px-6 py-4 ">
                               <span class={corrigeStatusSpan(tarefa.status)}>{corrigeStatus(tarefa.status)}</span>
                               
-                                <div class=" text mb-0 mb-2 "> <b>Tarefa:</b> <u>{tarefa.descricao}</u></div>
-                                <div class=" text mb-0 mb-2"><b>Funcionalidade:</b> <i>{tarefa.funcionalidade}</i></div>
+                              <div class=" text mb-0 mb-2 "> <b>Tarefa:</b> <u>{tarefa.descricao}</u></div>
+                              <div class=" text mb-0 mb-2"><i>"Como {tarefa.persona}, desejo {tarefa.desejo}, para {tarefa.descreu}"</i> </div>
+                              
+                            
                             </div>
                             </div>
                         </button>
