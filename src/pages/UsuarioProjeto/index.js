@@ -83,17 +83,12 @@ export default function Projeto(){
                     Authorization: idusuario,
                 }
             }).then(Response => {
-                if (Response.data.id){
-                    alert('Usuário adicionado ao projeto com sucesso!')
-                    history.push('/UsuarioProjeto')
-                }else{
-                    alert(Response.data.error);
-                }
+               alert(Response.data.retorno)
             });
-
-            history.push('/UsuarioProjeto')
+            
+            history.push('/UsuarioProjeto')            
         }catch(err){
-            alert('Erro ao cadastrar novo Usuario no Projeto!')
+            alert('Erro ao cadastrar novo Usuario no Projeto! Verifique o e-mail e tente novamente!')
         }
 
     }
