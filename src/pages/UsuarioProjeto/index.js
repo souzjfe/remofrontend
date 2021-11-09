@@ -82,7 +82,14 @@ export default function Projeto(){
                 headers: {
                     Authorization: idusuario,
                 }
-            })
+            }).then(Response => {
+                if (Response.data.id){
+                    alert('Usuário adicionado ao projeto com sucesso!')
+                    history.push('/UsuarioProjeto')
+                }else{
+                    alert(Response.data.error);
+                }
+            });
 
             history.push('/UsuarioProjeto')
         }catch(err){

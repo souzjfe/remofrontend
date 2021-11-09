@@ -117,12 +117,12 @@ export default function Profile(){
         tarefasFiltradas = tarefas.filter( element => element.idsprint == idSprint);
 
         if (tarefasFiltradas.length > 0){
-          return "Sprint: "+ titulo
+          return "* "+ titulo
         }
         
       }
 
-      return "Sprint: "+ titulo + " -  Sem Tarefas Alocadas"
+      return "* "+ titulo + " -  Sem Tarefas Alocadas"
   }
 
     function handleProcessadorTarefas() {
@@ -131,7 +131,7 @@ export default function Profile(){
           history.push('/Projeto')
         }
 
-        alert('Este processo consiste de alocar as tarefas nas sprints com base em seu nível de prioridade, isso pode demorar um pouco!');
+        alert('Este processo consiste de alocar as tarefas nas sprints com base em seu nível de prioridade. Portanto, isso pode demorar um pouco!');
 
 
       try{

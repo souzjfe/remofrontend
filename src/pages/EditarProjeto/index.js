@@ -137,6 +137,7 @@ export default function Projeto(){
                                     name="descricao"  
                                     limit="2000"
                                     style={{height: 150 }}
+                                    required
                                     className="border border-gray-400 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-600 dark:text-gray-400" 
                                     placeholder="Descreva as personas do seu projeto"
                                     value={personas}    
@@ -161,7 +162,7 @@ export default function Projeto(){
 
                         <Link to="/UsuarioProjeto">
                             <button className="bg-blue-700 focus:outline-none transition duration-150 ease-in-out hover:bg-blue-600 rounded text-white px-8 py-2 text-sm" >
-                               Time
+                               Adicionar Time
                             </button>
                         </Link>
                        

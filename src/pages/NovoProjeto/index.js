@@ -115,6 +115,7 @@ export default function NovoProjeto() {
                                     id="personas" 
                                     name="personas"  
                                     limit="2000"
+                                    required
                                     style={{height: 150 }}
                                     className="border border-gray-400 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-600 dark:text-gray-400" 
                                     placeholder="Descreva as personas do seu projeto"

@@ -41,7 +41,7 @@ export default function Profile(){
           localStorage.clear();
           history.push('/')
         }
-    
+
       if(!(idprojeto)){
         history.push('/Projeto')
       }

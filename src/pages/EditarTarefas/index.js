@@ -258,8 +258,7 @@ export default function NovaTarefa() {
                                     </label>
                                     <select 
                                         className="border border-gray-500 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-700 dark:text-gray-400" 
-                                        name="Prioridade"  
-                                        placeholder="Prioridade"
+                                        name="Sprint"
                                         value={idsprint}    
                                         onChange={ e => setIdSprint(e.target.value)}>
                                         <option  value={null}></option>
