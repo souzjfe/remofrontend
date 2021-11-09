@@ -27,6 +27,7 @@ export default function Login(){
             const response = await api.post('sessions', {email,hash})
 
             //arrumar aqui
+            localStorage.clear();
             localStorage.setItem('idusuario', response.data.idusuario);
             localStorage.setItem('nome', response.data.nome);
             history.push('/Projeto')

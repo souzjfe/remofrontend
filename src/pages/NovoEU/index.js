@@ -49,7 +49,6 @@ export default function NovoEU() {
                 }
             }).then(Response => {
                 if (Response.data.sucesso){
-                    alert(Response.data.sucesso)
                     alert("Estoria de Usuário cadastrado com sucesso! Agora é possível cadastrar os critérios de aceite na Estoria!");
                     localStorage.setItem('idestoria', Response.data.sucesso);
                     history.push('/Estoria_Usuario/EditarEU')
