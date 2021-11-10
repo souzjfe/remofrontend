@@ -79,20 +79,15 @@ export default function Projeto(){
 
         try{
 
-            await api.post('/projetousuario', data, {
+            await api.put ( 'projetousuario' , data , {   
                 headers: {
                     Authorization: idusuario,
                 }
-            }).then(Response => {
-                if(Response.data.retorno){
-                    alert(Response.data.retorno);
-                    history.push('/UsuarioProjeto');
-                }else{
-                    alert('Usuário cadastrado com sucesso!');
-                    history.push('/UsuarioProjeto');
-                }
             });
-                      
+            
+            alert("Usuário adicionado com Sucesso!");
+            window.location.reload();
+
         }catch(err){
             alert('Erro ao cadastrar novo Usuario no Projeto! Verifique o e-mail e tente novamente!')
         }
