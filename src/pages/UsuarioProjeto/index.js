@@ -50,13 +50,13 @@ export default function Projeto(){
 
     }
 
-    function deleteUsuario(id) {
+    async function deleteUsuario(id) {
         
         console.log(id)
     
         try{
 
-            api.delete(`projetousuario/${id}`, {
+            await api.delete(`projetousuario/${id}`, {
                 headers: {
                     Authorization: idprojeto,
                 }
@@ -69,7 +69,7 @@ export default function Projeto(){
         }
     }
 
-    function addUsuario(){
+    async function addUsuario(){
 
         const data = {
             idprojeto,
@@ -78,7 +78,7 @@ export default function Projeto(){
 
         try{
 
-            api.post('projetousuario', data, {
+            await api.post('projetousuario', data, {
                 headers: {
                     Authorization: idusuario,
                 }
