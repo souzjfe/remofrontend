@@ -62,6 +62,7 @@ export default function Projeto(){
                 }
             })
 
+            alert('Usuário removido com sucesso!')
             window.location.reload(); 
             
         }catch(err){
@@ -78,15 +79,15 @@ export default function Projeto(){
 
         try{
 
-            await api.post('projetousuario', data, {
+            await api.post('/projetousuario', data, {
                 headers: {
                     Authorization: idusuario,
                 }
             }).then(Response => {
-               alert(Response.data.retorno)
+                 alert(Response.data.retorno);
+                 history.push('/UsuarioProjeto');
             });
-            
-            history.push('/UsuarioProjeto')            
+                      
         }catch(err){
             alert('Erro ao cadastrar novo Usuario no Projeto! Verifique o e-mail e tente novamente!')
         }
