@@ -84,8 +84,13 @@ export default function Projeto(){
                     Authorization: idusuario,
                 }
             }).then(Response => {
-                 alert(Response.data.retorno);
-                 history.push('/UsuarioProjeto');
+                if(Response.data.retorno){
+                    alert(Response.data.retorno);
+                    history.push('/UsuarioProjeto');
+                }else{
+                    alert('Usuário cadastrado com sucesso!');
+                    history.push('/UsuarioProjeto');
+                }
             });
                       
         }catch(err){
