@@ -9,10 +9,13 @@ export default function Projeto(){
     const [projeto, setProjeto] = useState([]);
     const [estorias, setEstorias] = useState([]);
     const [tarefas, setTarefas] = useState([]);
+    const [criterios, setCriterios] = useState([]);
     
     let tarefasFiltradas ;
+    let criteriosFiltrados ;
     let NumTar = 0;
     let NumEu = 0;
+    let NumCrit = 0;
 
     const idusuario = localStorage.getItem('idusuario')
     const id = localStorage.getItem('idprojeto')
@@ -55,10 +58,6 @@ export default function Projeto(){
     }, []);
 
     useEffect(() => {
-        console.log(tarefas);
-    }, [tarefas]);
-
-    useEffect(() => {
         api.get(`estoria_usuario_doc`, {
             headers:{
                 Authorization: idprojeto,
@@ -69,11 +68,24 @@ export default function Projeto(){
 
     }, []);
 
+    useEffect(() => {
+        api.get(`criterioaceitedoc`, {
+            headers:{
+                Authorization: idprojeto,
+            }
+        }).then(Response => { 
+            setCriterios( Response.data)
+        });
+
+    }, []);
+
     function numeroEu( idEstoria){
         NumEu = NumEu + 1;
         NumTar  = 0;
+        NumCrit = 0;
 
         tarefasFiltradas = tarefas.filter( element => element.idestoria == idEstoria);
+        criteriosFiltrados = criterios.filter( element => element.idestoria == idEstoria);
 
         return NumEu
     }
@@ -102,6 +114,14 @@ export default function Projeto(){
         }
 
     }
+
+    function verificaCriterio(cenario, dado, quando, entao) {
+
+        NumCrit++
+        return "Critério Aceite "+NumCrit+ " -  Cenário: " + cenario + ", Dado: "+dado+", Quando: "+quando+", Então: "+entao+"."
+        
+    }
+
 
      return (
 
@@ -170,10 +190,16 @@ export default function Projeto(){
                         
                         {tarefasFiltradas.map((tarefa) => (
                             <div class=" text mb-0 mb-2 self-center items-center" key={tarefa.idtarefa}> 
-                                <li><i>{verificaTarefa(tarefa.descricao,eu.idestoria,tarefa.status)}</i></li> 
+                                <li><i> * {verificaTarefa(tarefa.descricao,eu.idestoria,tarefa.status)}</i></li> 
                             </div>
                         ))}
                          
+                        {criteriosFiltrados.map((criterio) => (
+                            <div class=" text mb-0 mb-2 self-center items-center" key={criterio.idcriterio}> 
+                                <li><i> - {verificaCriterio(criterio.cenario,criterio.dado,criterio.quando, criterio.entao)}</i></li> 
+                            </div>
+                        ))}
+
 
                         <div className="rounded overflow-hidden bg-white-00">
                             <div className=" mb-4">
